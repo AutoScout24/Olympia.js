@@ -1,0 +1,12 @@
+{
+  "name": "Olympia",
+  "version": "0.0.0",
+  "description": "",
+  "main": "index.js",
+  "author": "Adam Beres-Deak",
+  "license": "MIT",
+  "dependencies": {
+    "bluebird": "^2.2.2",
+    "chai": "^1.9.1"
+  }
+}
