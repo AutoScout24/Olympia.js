@@ -148,8 +148,9 @@ Test.prototype.waitUntilPageLoaded = function() {
     var self = this;
 
     this.next(function() {
+        self.browser.clearRequests();
+
         return new Promise(function(resolve) {
-            self.browser.clearRequests();
             self.browser.waitUntilPageLoaded(resolve);
         });
     });
@@ -175,6 +176,7 @@ Test.prototype.click = function(selector) {
 };
 
 Test.prototype.fillForm = function(formSelector, values) {
+    // TODO
 };
 
 Test.prototype.log = function(x) {
