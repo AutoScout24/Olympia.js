@@ -51,6 +51,12 @@ var Test = function(name) {
         logs: {
             value: [],
             writable: false
+        },
+
+        currentUrl: {
+            get: function() {
+                return browser.url;
+            }
         }
 	});
 
@@ -141,16 +147,19 @@ Test.prototype.open = function(url) {
 Test.prototype.waitUntilPageLoaded = function() {
     var self = this;
 
-    this.next(new Promise(function(resolve) {
-        self.browser.waitUntilPageLoaded(resolve);
-    }));
+    this.next(function() {
+        return new Promise(function(resolve) {
+            self.browser.clearRequests();
+            self.browser.waitUntilPageLoaded(resolve);
+        });
+    });
 
     return this;
 };
 
 Test.prototype.action = function() {
 	var self = this;
-    var args = arguments;
+    var args = Array.prototype.slice.call(arguments);
 
 	this.next(function() { self.browser.action.apply(self.browser, arguments); });
 
@@ -158,11 +167,14 @@ Test.prototype.action = function() {
 };
 
 Test.prototype.click = function(selector) {
+    var self = this;
 
+    this.next(function() {
+        self.browser.click(selector);
+    });
 };
 
 Test.prototype.fillForm = function(formSelector, values) {
-
 };
 
 Test.prototype.log = function(x) {

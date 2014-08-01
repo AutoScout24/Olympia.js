@@ -23,6 +23,12 @@ var Browser = function() {
             get: function() {
                 return this.action(function() { return document.title; });
             }
+        },
+
+        url: {
+            get: function() {
+                return this.page.url;
+            }
         }
     });
 
@@ -31,16 +37,21 @@ var Browser = function() {
         requests.push(requestData);
     };
 
+    this.page.onNavigationRequested = function(url, type, willNavigate, main) {
+        //console.log('!!!!!!!!', url);
+    };
+
     this.clearRequests = function() {
-        this.next(function() {
-            requests.length = 0;
-        });
+        requests.length = 0;
     };
 };
 
 Browser.prototype.waitUntilPageLoaded = function(callback) {
+    var to = setTimeout(callback, 10000);
+
     this.page.onLoadFinished = function(state) {
         if (state === 'success') {
+            clearTimeout(to);
             setTimeout(callback, 1000);
         } else {
             callback(new Error('Unable to load page'));
@@ -59,8 +70,24 @@ Browser.prototype.open = function(url, callback) {
     this.waitUntilPageLoaded(callback);
 };
 
-Browser.prototype.action = function(fn) {
-    return this.page.evaluate(fn);
+Browser.prototype.action = function() {
+    return this.page.evaluate.apply(this.page, arguments);
+};
+
+Browser.prototype.click = function(selector) {
+    this.page.evaluate(function(selector) {
+        
+        var node = document.querySelector(selector);
+
+        if (node) {
+            var eventClass = "MouseEvents";
+            var event = document.createEvent(eventClass);
+            event.initEvent('click', true, true);
+            event.synthetic = true;
+            node.dispatchEvent(event, true);
+        }
+
+    }, selector);
 };
 
 module.exports = Browser;
