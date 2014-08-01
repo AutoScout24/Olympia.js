@@ -1,5 +1,9 @@
 module.exports = {
-	googleAnalytics: require('./googleAnalytics'),
-	ivw: require('./ivw'),
-	seo: require('./seo')
+    tracking: {
+        googleAnalyticsPageview: require('./tracking/googleAnalyticsPageview'),
+        ivw: require('./tracking/ivw')
+    },
+    seo: {
+        mainElements: require('./seo/mainElements')
+    }
 };

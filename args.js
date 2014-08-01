@@ -25,4 +25,13 @@ system.args.forEach(function(arg) {
 	}
 });
 
+if (args.help) {
+    console.log('Testing Framework for Tracking and SEO');
+    console.log('Usage:');
+    console.log('        -h        --help            Help');
+    console.log('        -v        --verbose         Verbose output');
+    console.log('        -t        --teamcity        Reporting for Teamcity');
+    phantom.exit();
+}
+
 module.exports = args;
