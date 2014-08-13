@@ -52,7 +52,7 @@ Browser.prototype.waitUntilPageLoaded = function(callback) {
     this.page.onLoadFinished = function(state) {
         if (state === 'success') {
             clearTimeout(to);
-            setTimeout(callback, 1000);
+            setTimeout(callback, 3000);
         } else {
             callback(new Error('Unable to load page'));
         }
