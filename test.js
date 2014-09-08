@@ -158,6 +158,14 @@ Test.prototype.waitUntilPageLoaded = function() {
     return this;
 };
 
+Test.prototype.wait = function(millis) {
+    this.next(function() {
+        return new Promise(function(resolve) {
+            setTimeout(resolve, millis);
+        });
+    });
+};
+
 Test.prototype.action = function() {
 	var self = this;
     var args = Array.prototype.slice.call(arguments);
