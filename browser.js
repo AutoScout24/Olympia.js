@@ -37,9 +37,11 @@ var Browser = function() {
         requests.push(requestData);
     };
 
+	/*
     this.page.onNavigationRequested = function(url, type, willNavigate, main) {
-        //console.log('!!!!!!!!', url);
+        console.log('!!!!!!!!', url);
     };
+	*/
 
     this.clearRequests = function() {
         requests.length = 0;

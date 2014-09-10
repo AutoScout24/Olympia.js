@@ -158,11 +158,19 @@ Test.prototype.waitUntilPageLoaded = function() {
     return this;
 };
 
+Test.prototype.wait = function(millis) {
+    this.next(function() {
+        return new Promise(function(resolve) {
+            setTimeout(resolve, millis);
+        });
+    });
+};
+
 Test.prototype.action = function() {
 	var self = this;
     var args = Array.prototype.slice.call(arguments);
 
-	this.next(function() { self.browser.action.apply(self.browser, arguments); });
+	this.next(function() { self.browser.action.apply(self.browser, args); });
 
     return this;
 };
@@ -173,6 +181,13 @@ Test.prototype.click = function(selector) {
     this.next(function() {
         self.browser.click(selector);
     });
+};
+
+Test.prototype.clearRequests = function() {
+	var self = this;
+	this.next(function() {
+		self.browser.clearRequests();
+	});
 };
 
 Test.prototype.fillForm = function(formSelector, values) {

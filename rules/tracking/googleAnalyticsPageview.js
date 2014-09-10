@@ -17,10 +17,18 @@ module.exports = function(params) {
 
         var foundPageName = decodeURIComponent(getURLParameter(pageViewRequests[0].url, 'dp')).split('?')[0];
 
-        this.expect(foundPageName).to.equal(params.pageName, 'Unexpected page name.')
+        this.expect(foundPageName).to.equal(params.pageName, 'Unexpected page name.');
+		
+		var url = pageViewRequests[0].url;
+		
+		for (var key in params.params) {
+            var value = getURLParameter(url, key);
+            var expected = params.params[key];
+            this.expect(value).to.equal(expected, 'Incorrect value for parameter: ' + key);
+        }
     };
 
-    googleAnalyticsPageview.name = 'Google Analytics Page View'
+    googleAnalyticsPageview.name = 'Google Analytics Page View';
 
     return googleAnalyticsPageview;
 };
