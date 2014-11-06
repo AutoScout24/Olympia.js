@@ -15,6 +15,10 @@ module.exports = function(params) {
 
         this.expect(pageViewRequests.length).to.equal(1, 'There should be exactly one page view request to this tracker: "' + params.trackerId + '".');
 
+        if (!params.pageName) {
+            return;
+        }
+
         var foundPageName = decodeURIComponent(getURLParameter(pageViewRequests[0].url, 'dp')).split('?')[0];
 
         this.expect(foundPageName).to.equal(params.pageName, 'Unexpected page name.');
