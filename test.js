@@ -43,7 +43,7 @@ var Test = function(name) {
 		},
 
 		logger: {
-            value: require('./loggers/'+ logger')(function(x) { /*self.log(x);*/ self.logs.push(x); }),
+            value: require('./loggers/'+ logger)(function(x) { /*self.log(x);*/ self.logs.push(x); }),
 			writable: false
 		},
 
