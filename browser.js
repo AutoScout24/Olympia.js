@@ -49,7 +49,9 @@ var Browser = function() {
 };
 
 Browser.prototype.waitUntilPageLoaded = function(callback) {
-    var to = setTimeout(callback, 10000);
+    var to = setTimeout(function() {
+		callback(new Error('Unable to load page (timeout)'));
+    }, 10000);
 
     this.page.onLoadFinished = function(state) {
         if (state === 'success') {
