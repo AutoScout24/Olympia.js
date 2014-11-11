@@ -1,7 +1,7 @@
 {
   "name": "Olympia",
-  "version": "0.0.0",
-  "description": "",
+  "version": "0.0.1",
+  "description": "A tracking and SEO testing framework",
   "main": "index.js",
   "author": "Adam Beres-Deak",
   "license": "MIT",
@@ -9,4 +9,17 @@
     "bluebird": "^2.2.2",
     "chai": "^1.9.1"
   }
+  "readmeFilename": "README.md",
+  "repository": {
+	"type": "git",
+	"url": "https://github.com/AutoScout24/Olympia.js.git"
+  },
+  "keywords": [
+	"tracking",
+	"test",
+	"analytics",
+	"googleanalytics",
+	"phantomejs",
+	"framework"	
+  ]
 }
