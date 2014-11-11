@@ -1,9 +1,13 @@
 var fs = require('fs');
-
+var args = require('./args');
 var expect = require('chai').expect;
 
 var Browser = require('./browser');
 var Promise = require('bluebird');
+var logger = 'simple'
+if(args.teamcity) {
+	logger = 'teamcity';
+}
 
 var TestLogger = function(testSuiteName) {
 	Object.defineProperties(this, {
@@ -39,7 +43,7 @@ var Test = function(name) {
 		},
 
 		logger: {
-            value: require('./loggers/teamcity')(function(x) { /*self.log(x);*/ self.logs.push(x); }),
+            value: require('./loggers/'+ logger')(function(x) { /*self.log(x);*/ self.logs.push(x); }),
 			writable: false
 		},
 
